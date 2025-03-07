@@ -1,0 +1,78 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "5aeeb5e8-9d85-437a-bcb8-c2a3d321d580")
+	(paper "USLegal")
+	(title_block
+		(title "LogicSpark'09 Revisited")
+		(date "2025-03-01")
+		(rev "2.0")
+		(company "Frédéric \"MicroHobbyist\" Segard")
+		(comment 1 "https://microhobbyist.com/")
+	)
+	(lib_symbols)
+	(sheet
+		(at 25.4 38.1)
+		(size 38.1 12.7)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "09cbd9d8-b4d6-483c-bf1a-da195c518008")
+		(property "Sheetname" "CPU section"
+			(at 25.4 37.3884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "CPU.kicad_sch"
+			(at 25.4 51.3846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+				(hide yes)
+			)
+		)
+		(property "Title" "CPU, Reset, Clock & Buffers"
+			(at 25.146 52.578 0)
+			(do_not_autoplace yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "More" "Includes PLD for added control signals and variable clock"
+			(at 25.146 54.864 0)
+			(effects
+				(font
+					(size 1.016 1.016)
+					(italic yes)
+				)
+				(justify left)
+			)
+		)
+		(instances
+			(project "Episode 1 - The 6309 basics and more"
+				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
