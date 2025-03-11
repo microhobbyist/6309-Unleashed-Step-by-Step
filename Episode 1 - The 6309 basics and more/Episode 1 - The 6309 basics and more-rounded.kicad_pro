@@ -58,9 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "missing_courtyard|67106800|44627800|446a1c6b-2980-46b9-9a44-e8add945f524|00000000-0000-0000-0000-000000000000"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -188,8 +186,7 @@
         0.254,
         0.3048,
         0.508,
-        0.762,
-        1.5
+        0.762
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -467,7 +464,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Episode 1 - The 6309 basics and more.kicad_pro",
+    "filename": "Episode 1 - The 6309 basics and more-rounded.kicad_pro",
     "version": 1
   },
   "net_settings": {

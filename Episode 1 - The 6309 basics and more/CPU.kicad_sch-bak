@@ -2552,6 +2552,127 @@
 				)
 			)
 		)
+		(symbol "Device:NetTie_2"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(property "Reference" "NT"
+				(at 0 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "NetTie_2"
+				(at 0 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Net tie, 2 pins"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "net tie short"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Net*Tie*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "NetTie_2_0_1"
+				(polyline
+					(pts
+						(xy -1.27 0) (xy 1.27 0)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "NetTie_2_1_1"
+				(pin passive line
+					(at -2.54 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:R_Network03"
 			(pin_names
 				(offset 0) hide)
@@ -5544,7 +5665,7 @@
 	)
 	(wire
 		(pts
-			(xy 190.5 132.08) (xy 199.39 132.08)
+			(xy 190.5 132.08) (xy 194.31 132.08)
 		)
 		(stroke
 			(width 0)
@@ -10021,7 +10142,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "010ea78b-25c9-4cef-9bab-4f10afc471f7")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR014"
 			(at 41.91 132.08 0)
 			(effects
 				(font
@@ -10071,7 +10192,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR013")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -10421,7 +10542,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "08c23e0a-a02f-4ed4-b39a-d02c14c62ec2")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR07"
 			(at 46.99 57.15 0)
 			(effects
 				(font
@@ -10471,7 +10592,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR06")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -10795,7 +10916,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0d877629-1850-4431-8d03-f49dbd2d3b80")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR025"
 			(at 125.73 198.12 0)
 			(effects
 				(font
@@ -10845,7 +10966,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR024")
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -10860,7 +10981,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "17102ba8-2461-499f-9ac1-83290a62c297")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR024"
 			(at 125.73 185.42 0)
 			(effects
 				(font
@@ -10910,7 +11031,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR023")
+					(reference "#PWR024")
 					(unit 1)
 				)
 			)
@@ -10925,7 +11046,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1c081ebe-bdb6-4608-99a2-908cb75ce4ed")
-		(property "Reference" "C8"
+		(property "Reference" "C5"
 			(at 154.178 185.42 0)
 			(effects
 				(font
@@ -10979,7 +11100,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "C8")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -11059,7 +11180,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3c10b50f-9e38-4262-a2df-254da46e240b")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR012"
 			(at 212.09 110.49 0)
 			(effects
 				(font
@@ -11109,7 +11230,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR011")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -11124,7 +11245,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "40018ad9-1b62-49ad-b590-50e82183b1b7")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR013"
 			(at 88.9 116.84 0)
 			(effects
 				(font
@@ -11174,7 +11295,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR012")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -11189,7 +11310,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4489571f-8b3c-456a-abd9-67fadc9e5a77")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR022"
 			(at 29.21 186.69 0)
 			(effects
 				(font
@@ -11239,7 +11360,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR021")
+					(reference "#PWR022")
 					(unit 1)
 				)
 			)
@@ -11254,7 +11375,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4bef81e3-0680-4e99-87b3-eb30f765427a")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR020"
 			(at 41.91 163.83 0)
 			(effects
 				(font
@@ -11304,7 +11425,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR019")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -11319,7 +11440,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4c7c7ee3-398e-4181-ad79-2963e7cc2b29")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR016"
 			(at 88.9 142.24 0)
 			(effects
 				(font
@@ -11369,7 +11490,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR015")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -11384,7 +11505,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "528b7181-ebd3-40a0-ac2d-5285792f0c57")
-		(property "Reference" "#PWR018"
+		(property "Reference" "#PWR019"
 			(at 212.09 153.67 0)
 			(effects
 				(font
@@ -11434,7 +11555,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR018")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -11514,7 +11635,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "645e7d27-af12-42b0-9a15-c4f4f5120979")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR021"
 			(at 29.21 173.99 0)
 			(effects
 				(font
@@ -11564,7 +11685,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR020")
+					(reference "#PWR021")
 					(unit 1)
 				)
 			)
@@ -11841,7 +11962,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7f0b737a-e1c4-4bef-bf00-23d6bdd71448")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR08"
 			(at 143.51 82.55 0)
 			(effects
 				(font
@@ -11891,7 +12012,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR07")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -12165,7 +12286,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "954653dc-b752-49c8-9374-ef9c809b604c")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR023"
 			(at 88.9 187.96 0)
 			(effects
 				(font
@@ -12215,7 +12336,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR022")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -12422,7 +12543,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a9ceaafe-9f61-4dd8-b4a5-9c9f62bee570")
-		(property "Reference" "C7"
+		(property "Reference" "C9"
 			(at 145.288 185.42 0)
 			(effects
 				(font
@@ -12476,7 +12597,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "C7")
+					(reference "C9")
 					(unit 1)
 				)
 			)
@@ -12662,6 +12783,73 @@
 			(project ""
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
 					(reference "RN3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:NetTie_2")
+		(at 196.85 132.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "c3b245e5-70d1-4f5e-a99b-99f273886406")
+		(property "Reference" "NT1"
+			(at 196.85 131.064 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "B8"
+			(at 196.85 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Bridged_RoundedPad1.0x1.5mm"
+			(at 196.85 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 196.85 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Net tie, 2 pins"
+			(at 196.85 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8cdd4252-1c8d-426f-acf8-edf784ac9de0")
+		)
+		(pin "2"
+			(uuid "b5437fea-4579-4085-8325-f963ed365c6e")
+		)
+		(instances
+			(project ""
+				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
+					(reference "NT1")
 					(unit 1)
 				)
 			)
@@ -12883,7 +13071,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cf771a70-72d9-45b6-b657-e77a42fbb2e4")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR017"
 			(at 190.5 147.32 0)
 			(effects
 				(font
@@ -12933,7 +13121,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR016")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -13013,7 +13201,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "db86a7cf-5e46-4766-bbaf-582a758d9eea")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR09"
 			(at 212.09 82.55 0)
 			(effects
 				(font
@@ -13063,7 +13251,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR08")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
@@ -13078,7 +13266,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dd2ad84a-03c0-4471-9a4c-ea902ed01a83")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR015"
 			(at 41.91 142.24 0)
 			(effects
 				(font
@@ -13128,7 +13316,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR014")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -13143,7 +13331,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dd2b6e32-f6d8-4b25-bca9-6a481ee64e0a")
-		(property "Reference" "C5"
+		(property "Reference" "C6"
 			(at 127.508 185.42 0)
 			(effects
 				(font
@@ -13197,7 +13385,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "C5")
+					(reference "C6")
 					(unit 1)
 				)
 			)
@@ -13286,7 +13474,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f469ff4f-0bd6-4404-b79a-fed79760cb1b")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR011"
 			(at 143.51 110.49 0)
 			(effects
 				(font
@@ -13336,7 +13524,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR010")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -13351,7 +13539,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f5a0ae40-84e7-4e1d-ada0-61b7456c8332")
-		(property "Reference" "C6"
+		(property "Reference" "C8"
 			(at 136.398 185.42 0)
 			(effects
 				(font
@@ -13405,7 +13593,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "C6")
+					(reference "C8")
 					(unit 1)
 				)
 			)
@@ -13530,7 +13718,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fabf0bbf-00a4-4422-afa7-7d3577ad8531")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR018"
 			(at 143.51 153.67 0)
 			(effects
 				(font
@@ -13580,7 +13768,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR017")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -13595,7 +13783,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fd6683a7-f2ab-48d0-beb1-cd2bf0d282e6")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR010"
 			(at 41.91 110.49 0)
 			(effects
 				(font
@@ -13645,7 +13833,7 @@
 		(instances
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580/09cbd9d8-b4d6-483c-bf1a-da195c518008"
-					(reference "#PWR09")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
