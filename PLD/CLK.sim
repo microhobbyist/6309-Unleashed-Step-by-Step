@@ -1,0 +1,218 @@
+%SIGNAL
+PIN   4 =  CLK2 
+PIN   1 =  CLK_DIV1 
+PIN   2 =  CLK_DIV2 
+PIN   3 =  CLK_DIV4 
+PIN  23 =  CPUclk 
+PIN  22 =  D0 
+PIN  21 =  D1 
+PIN   5 =  E 
+PIN  20 = !HALT 
+PIN  10 = !MREQ 
+PIN  15 = !RAMOE 
+PIN   7 = !RESET 
+PIN  16 = !ROMCS 
+PIN   9 = !ROMDIS 
+PIN   6 =  R_W 
+PIN  17 =  SPD_LED_BLU 
+PIN  18 =  SPD_LED_GRN 
+PIN  19 =  SPD_LED_RED 
+PIN   8 = !SPEEDreg 
+PIN  30 =  haltActive 
+PIN  31 =  haltTimer0 
+PIN  32 =  haltTimer1 
+PIN  33 =  haltTimer2 
+PIN  28 =  prev0 
+PIN  29 =  prev1 
+PIN  25 =  shadow 
+PIN  26 =  speed0 
+PIN  27 =  speed1 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+CPUclk =>
+    CLK_DIV4 & !speed0 & !speed1
+  # CLK_DIV2 & speed0 & !speed1
+  # CLK_DIV1 & !speed0 & speed1
+  # CLK2 & speed0 & speed1
+
+D0 =>
+    speed0
+
+D0.oe  =>
+    R_W & !SPEEDreg
+
+D1 =>
+    speed1
+
+D1.oe  =>
+    R_W & !SPEEDreg
+
+HALT =>
+    !haltActive
+
+RAMOE =>
+    E & R_W & shadow
+
+ROMCS =>
+    MREQ & !shadow
+
+SPD_LED_BLY =>
+    !speed0 & !speed1
+
+SPD_LED_GRN =>
+    speed0 & !speed1
+
+SPD_LED_RED =>
+    speed1
+
+changeDetected =>
+    !prev0 & speed0
+  # prev0 & !speed0
+  # !prev1 & speed1
+  # prev1 & !speed1
+
+haltActive.d  =>
+    RESET & prev1 & !speed1
+  # RESET & !prev1 & speed1
+  # RESET & prev0 & !speed0
+  # RESET & !prev0 & speed0
+  # RESET & haltActive & !haltTimer2
+  # RESET & haltActive & !haltTimer1
+  # RESET & haltActive & !haltTimer0
+
+haltActive.ar  =>
+    0 
+
+haltActive.ck  =>
+    CLK_DIV4
+
+haltActive.sp haltTimer0.sp haltTimer1.sp haltTimer2.sp prev0.sp prev1.sp shadow.sp speed0.sp speed1.sp  =>
+    0 
+
+haltDone =>
+    haltTimer0 & haltTimer1 & haltTimer2
+
+haltTimer0.d  =>
+    RESET & haltActive & !haltTimer0
+
+haltTimer0.ar  =>
+    0 
+
+haltTimer0.ck  =>
+    CLK_DIV4
+
+haltTimer0.sp  =>
+    
+haltTimer1.d  =>
+    RESET & haltActive & haltTimer0 & !haltTimer1
+
+haltTimer1.ar  =>
+    0 
+
+haltTimer1.ck  =>
+    CLK_DIV4
+
+haltTimer1.sp  =>
+    
+haltTimer2.d  =>
+    RESET & haltActive & haltTimer0 & haltTimer1 & !haltTimer2
+
+haltTimer2.ar  =>
+    0 
+
+haltTimer2.ck  =>
+    CLK_DIV4
+
+haltTimer2.sp  =>
+    
+is_clk2 =>
+    speed0 & speed1
+
+is_div1 =>
+    !speed0 & speed1
+
+is_div2 =>
+    speed0 & !speed1
+
+is_div4 =>
+    !speed0 & !speed1
+
+prev0.d  =>
+    speed0
+
+prev0.ar  =>
+    0 
+
+prev0.ck  =>
+    E
+
+prev0.sp  =>
+    
+prev1.d  =>
+    speed1
+
+prev1.ar  =>
+    0 
+
+prev1.ck  =>
+    E
+
+prev1.sp  =>
+    
+shadow.d  =>
+    RESET & shadow
+  # RESET & !ROMDIS
+
+shadow.ar  =>
+    0 
+
+shadow.ck  =>
+    E
+
+shadow.sp  =>
+    
+speed0.d  =>
+    D0 & E & RESET & !R_W & SPEEDreg
+
+speed0.ar  =>
+    0 
+
+speed0.ck  =>
+    E
+
+speed0.sp  =>
+    
+speed1.d  =>
+    D1 & E & RESET & !R_W & SPEEDreg
+
+speed1.ar  =>
+    0 
+
+speed1.ck  =>
+    E
+
+speed1.sp  =>
+    
+CPUclk.oe  =>
+    1 
+
+HALT.oe  =>
+    1 
+
+RAMOE.oe  =>
+    1 
+
+ROMCS.oe  =>
+    1 
+
+SPD_LED_GRN.oe  =>
+    1 
+
+SPD_LED_RED.oe  =>
+    1 
+
+%END

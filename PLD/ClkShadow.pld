@@ -1,0 +1,135 @@
+Name     CLK ;
+PartNo   ATF750C ;
+Date     2025-04-07 ;
+Revision 5 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/*               ________
+                |        |
+   CLK_DIV1 i---|1     24|---p Vcc                      
+   CLK_DIV2 i---|2     23|---o CPUclk                   
+   CLK_DIV4 i---|3     22|---b D0                       
+       CLK2 i---|4     21|---b D1                       
+          E i---|5     20|---o !HALT                    
+        R_W i---|6     19|---o SPD_LED_RED              
+     !RESET i---|7     18|---o SPD_LED_GRN              
+  !SPEEDreg i---|8     17|---o SPD_LED_BLU        
+    !ROMDIS i---|9     16|---o !ROMCS                  
+      !MREQ i---|10    15|---o !RAMOE                     
+            i---|11    14|---o                      
+        GND p---|12    13|---i                          
+                |________|
+*/
+
+/* INPUTS (External Clock Dividers + Controls) */
+PIN 1  = CLK_DIV1     ;  /* Input: Undivided 14.31818 MHz clock (3.58MHz) */
+PIN 2  = CLK_DIV2     ;  /* Input: Divided-by-2 clock from 74HCT74 (1.79MHz) */
+PIN 3  = CLK_DIV4     ;  /* Input: Divided-by-4 clock from 74HCT74 (0.89MHz) */
+PIN 4  = CLK2         ;  /* Input: Second CPU clock from 16-20 MHz (4-5MHz) */
+PIN 5  = E            ;  /* Input: E clock */
+PIN 6  = R_W          ;  /* Input: Read/Write (1=Read, 0=Write) */
+PIN 7  = !RESET       ;  /* Input: Active-low reset */
+PIN 8  = !SPEEDreg    ;  /* Input: Speed register chip select (active-low) */
+PIN 9  = !ROMDIS      ;  /* Rom/FLASH disable (active-low) */
+PIN 10 = !MREQ        ;  /* Memory Request (active-low) */
+
+/* BIDIRECTIONAL I/O */
+PIN 22 = D0           ;  /* Bidirectional: Data bus bit 0 */
+PIN 21 = D1           ;  /* Bidirectional: Data bus bit 1 */
+
+/* OUTPUTS */
+PIN 23 = CPUclk       ;  /* Output: Selected CPU clock */
+PIN 20 = !HALT        ;  /* Output: HALT signal to CPU (active-low) */
+PIN 19 = SPD_LED_RED  ;  /* Output: Red LED */
+PIN 18 = SPD_LED_GRN  ;  /* Output: Green LED */
+PIN 17 = SPD_LED_BLU  ;  /* Output: Blue LED */
+PIN 16 = !ROMCS       ;  /* Output: ROM chip select */
+PIN 15 = !RAMOE       ;  /* Output: RAM output enable */
+
+/* NODES */
+NODE  shadow, speed0, speed1, prev0, prev1 ;
+NODE  haltActive, haltTimer0, haltTimer1, haltTimer2 ;
+
+/* Shadow Register (ROM/RAM SELECTOR) */
+shadow.d  = (!RESET & (ROMDIS # shadow)) ;
+shadow.ck = E ;
+shadow.ar = 'b'0 ;
+shadow.sp = 'b'0 ;
+ROMCS     = !shadow & !MREQ ;
+RAMOE     = shadow & (R_W & E) ;
+
+/* Speed Register (Write Only) */
+speed0.d  = (!RESET & (!SPEEDreg & (!R_W & E) & D0)) ;
+speed0.ck = E ;
+speed0.ar = 'b'0 ;
+speed0.sp = 'b'0 ;
+
+speed1.d  = (!RESET & (!SPEEDreg & (!R_W & E) & D1)) ;
+speed1.ck = E ;
+speed1.ar = 'b'0 ;
+speed1.sp = 'b'0 ;
+
+/* Data Bus Output During Read */
+D0.OE = SPEEDreg & R_W ;
+D1.OE = SPEEDreg & R_W ;
+D0    = speed0 ;
+D1    = speed1 ;
+
+/* Previous speed register values */
+prev0.d  = speed0 ;
+prev0.ck = E ;
+prev0.ar = 'b'0 ;
+prev0.sp = 'b'0 ;
+
+prev1.d  = speed1 ;
+prev1.ck = E ;
+prev1.ar = 'b'0 ;
+prev1.sp = 'b'0 ;
+
+changeDetected = (speed0 $ prev0) # (speed1 $ prev1) ;
+
+/* Halt State Machine (3-cycle delay) */
+haltActive.d  = (!RESET & (changeDetected # (haltActive & !haltDone))) ;
+haltActive.ck = CLK_DIV4 ;
+haltActive.ar = 'b'0 ;
+haltActive.sp = 'b'0 ;
+
+haltTimer0.d  = (!RESET & haltActive & !haltTimer0) ;
+haltTimer0.ck = CLK_DIV4 ;
+haltTimer0.ar = 'b'0 ;
+haltTimer0.sp = 'b'0 ;
+
+haltTimer1.d  = (!RESET & haltActive & haltTimer0 & !haltTimer1) ;
+haltTimer1.ck = CLK_DIV4 ;
+haltTimer1.ar = 'b'0 ;
+haltTimer1.sp = 'b'0 ;
+
+haltTimer2.d  = (!RESET & haltActive & haltTimer0 & haltTimer1 & !haltTimer2) ;
+haltTimer2.ck = CLK_DIV4 ;
+haltTimer2.ar = 'b'0 ;
+haltTimer2.sp = 'b'0 ;
+
+haltDone = haltTimer0 & haltTimer1 & haltTimer2 ;
+HALT     = !haltActive ;
+
+/* Clock Selection */
+is_div4 = !speed1 & !speed0 ;   /* 00 = /4   (slow)   */
+is_div2 = !speed1 &  speed0 ;   /* 01 = /2   (normal) */
+is_div1 =  speed1 & !speed0 ;   /* 10 = /1   (fast)   */
+is_clk2 =  speed1 &  speed0 ;   /* 11 = CLK2 (turbo)  */
+
+
+/* Select CPU clock source */
+CPUclk = (is_div4 & CLK_DIV4) #
+         (is_div2 & CLK_DIV2) #
+         (is_div1 & CLK_DIV1) #
+         (is_clk2 & CLK2) ;
+
+/* Led Indicator */
+SPD_LED_RED = speed1 ;
+SPD_LED_GRN = !speed1 & speed0 ;
+SPD_LED_BLY = !speed1 & !speed0 ;

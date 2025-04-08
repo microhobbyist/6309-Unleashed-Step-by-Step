@@ -1,0 +1,165 @@
+LISTING FOR LOGIC DESCRIPTION FILE: CLK.pld                          Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Apr 07 07:24:30 2025
+
+  1:Name     CLK ;
+  2:PartNo   ATF750C ;
+  3:Date     2025-04-7 ;
+  4:Revision 05 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:/*               ________
+ 12:                |        |
+ 13:   CLK_DIV1 i---|1     24|---p Vcc                      
+ 14:   CLK_DIV2 i---|2     23|---o CPUclk                   
+ 15:   CLK_DIV4 i---|3     22|---b D0                       
+ 16:       CLK2 i---|4     21|---b D1                       
+ 17:          E i---|5     20|---o !HALT                    
+ 18:        R_W i---|6     19|---o SPD_LED_RED              
+ 19:     !RESET i---|7     18|---o SPD_LED_GRN              
+ 20:  !SPEEDreg i---|8     17|---o SPD_LED_BLU        
+ 21:    !ROMDIS i---|9     16|---o !ROMCS                  
+ 22:      !MREQ i---|10    15|---o !RAMOE                     
+ 23:            x---|11    14|---x                      
+ 24:        GND p---|12    13|---x                          
+ 25:                |________|
+ 26:*/
+ 27:
+ 28:/* INPUTS (External Clock Dividers + Controls) */
+ 29:PIN 1  = CLK_DIV1     ;  /* Input: Undivided 14.31818 MHz clock (3.58MHz) */
+ 30:PIN 2  = CLK_DIV2     ;  /* Input: Divided-by-2 clock from 74HCT74 (1.79MHz) */
+ 31:PIN 3  = CLK_DIV4     ;  /* Input: Divided-by-4 clock from 74HCT74 (0.89MHz) */
+ 32:PIN 4  = CLK2         ;  /* Input: Second CPU clock from 16-20 MHz (4-5MHz) */
+ 33:PIN 5  = E            ;  /* Input: E clock */
+ 34:PIN 6  = R_W          ;  /* Input: Read/Write (1=Read, 0=Write) */
+ 35:PIN 7  = !RESET       ;  /* Input: Active-low reset */
+ 36:PIN 8  = !SPEEDreg    ;  /* Input: Speed register chip select (active-low) */
+ 37:PIN 9  = !ROMDIS      ;  /* Rom/FLASH disable (active-low) */
+ 38:PIN 10 = !MREQ        ;  /* Memory Request (active-low) */
+ 39:
+ 40:/* BIDIRECTIONAL I/O */
+ 41:PIN 22 = D0           ;  /* Bidirectional: Data bus bit 0 */
+ 42:PIN 21 = D1           ;  /* Bidirectional: Data bus bit 1 */
+ 43:
+ 44:/* OUTPUTS */
+ 45:PIN 23 = CPUclk       ;  /* Output: Selected CPU clock */
+ 46:PIN 20 = !HALT        ;  /* Output: HALT signal to CPU (active-low) */
+ 47:PIN 19 = SPD_LED_RED  ;  /* Output: Red LED */
+ 48:PIN 18 = SPD_LED_GRN  ;  /* Output: Green LED */
+ 49:PIN 17 = SPD_LED_BLU  ;  /* Output: Blue LED */
+ 50:PIN 16 = !ROMCS       ;  /* Output: ROM chip select */
+ 51:PIN 15 = !RAMOE       ;  /* Output: RAM output enable */
+ 52:
+ 53:/* NODES */
+
+LISTING FOR LOGIC DESCRIPTION FILE: CLK.pld                          Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Apr 07 07:24:30 2025
+
+ 54:NODE  shadow, speed0, speed1, prev0, prev1 ;
+ 55:NODE  haltActive, haltTimer0, haltTimer1, haltTimer2 ;
+ 56:
+ 57:/* Shadow Register (ROM/RAM SELECTOR) */
+ 58:shadow.d  = (!RESET & (ROMDIS # shadow)) ;
+ 59:shadow.ck = E ;
+ 60:shadow.ar = 'b'0 ;
+ 61:shadow.sp = 'b'0 ;
+ 62:ROMCS     = !shadow & !MREQ ;
+ 63:RAMOE     = shadow & (R_W & E) ;
+ 64:
+ 65:/* Speed Register (Write Only) */
+ 66:speed0.d  = (!RESET & (!SPEEDreg & (!R_W & E) & D0)) ;
+ 67:speed0.ck = E ;
+ 68:speed0.ar = 'b'0 ;
+ 69:speed0.sp = 'b'0 ;
+ 70:
+ 71:speed1.d  = (!RESET & (!SPEEDreg & (!R_W & E) & D1)) ;
+ 72:speed1.ck = E ;
+ 73:speed1.ar = 'b'0 ;
+ 74:speed1.sp = 'b'0 ;
+ 75:
+ 76:/* Data Bus Output During Read */
+ 77:D0.OE = SPEEDreg & R_W ;
+ 78:D1.OE = SPEEDreg & R_W ;
+ 79:D0    = speed0 ;
+ 80:D1    = speed1 ;
+ 81:
+ 82:/* Previous speed register values */
+ 83:prev0.d  = speed0 ;
+ 84:prev0.ck = E ;
+ 85:prev0.ar = 'b'0 ;
+ 86:prev0.sp = 'b'0 ;
+ 87:
+ 88:prev1.d  = speed1 ;
+ 89:prev1.ck = E ;
+ 90:prev1.ar = 'b'0 ;
+ 91:prev1.sp = 'b'0 ;
+ 92:
+ 93:changeDetected = (speed0 $ prev0) # (speed1 $ prev1) ;
+ 94:
+ 95:/* Halt State Machine (3-cycle delay) */
+ 96:haltActive.d  = (!RESET & (changeDetected # (haltActive & !haltDone))) ;
+ 97:haltActive.ck = CLK_DIV4 ;
+ 98:haltActive.ar = 'b'0 ;
+ 99:haltActive.sp = 'b'0 ;
+100:
+101:haltTimer0.d  = (!RESET & haltActive & !haltTimer0) ;
+102:haltTimer0.ck = CLK_DIV4 ;
+103:haltTimer0.ar = 'b'0 ;
+104:haltTimer0.sp = 'b'0 ;
+105:
+106:haltTimer1.d  = (!RESET & haltActive & haltTimer0 & !haltTimer1) ;
+107:haltTimer1.ck = CLK_DIV4 ;
+
+LISTING FOR LOGIC DESCRIPTION FILE: CLK.pld                          Page 3
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Apr 07 07:24:30 2025
+
+108:haltTimer1.ar = 'b'0 ;
+109:haltTimer1.sp = 'b'0 ;
+110:
+111:haltTimer2.d  = (!RESET & haltActive & haltTimer0 & haltTimer1 & !haltTimer2) ;
+112:haltTimer2.ck = CLK_DIV4 ;
+113:haltTimer2.ar = 'b'0 ;
+114:haltTimer2.sp = 'b'0 ;
+115:
+116:haltDone = haltTimer0 & haltTimer1 & haltTimer2 ;
+117:HALT     = !haltActive ;
+118:
+119:/* Clock Selection */
+120:is_div4 = !speed1 & !speed0 ;   /* 00 = /4   (slow)   */
+121:is_div2 = !speed1 &  speed0 ;   /* 01 = /2   (normal) */
+122:is_div1 =  speed1 & !speed0 ;   /* 10 = /1   (fast)   */
+123:is_clk2 =  speed1 &  speed0 ;   /* 11 = CLK2 (turbo)  */
+124:
+125:
+126:/* Select CPU clock source */
+127:CPUclk = (is_div4 & CLK_DIV4) #
+128:         (is_div2 & CLK_DIV2) #
+129:         (is_div1 & CLK_DIV1) #
+130:         (is_clk2 & CLK2) ;
+131:
+132:/* Led Indicator */
+133:SPD_LED_RED = speed1 ;
+134:SPD_LED_GRN = !speed1 & speed0 ;
+135:SPD_LED_BLY = !speed1 & !speed0 ;
+136:
+137:
+
+
+
+Jedec Fuse Checksum       (c3e9)
+Jedec Transmit Checksum   (a6fb)

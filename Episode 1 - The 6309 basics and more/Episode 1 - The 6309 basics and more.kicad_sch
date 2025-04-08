@@ -13,7 +13,7 @@
 	)
 	(lib_symbols)
 	(sheet
-		(at 25.4 22.86)
+		(at 20.32 22.86)
 		(size 38.1 12.7)
 		(stroke
 			(width 0.1524)
@@ -24,7 +24,7 @@
 		)
 		(uuid "09cbd9d8-b4d6-483c-bf1a-da195c518008")
 		(property "Sheetname" "CPU section"
-			(at 25.4 22.1484 0)
+			(at 20.32 22.1484 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -33,7 +33,7 @@
 			)
 		)
 		(property "Sheetfile" "CPU.kicad_sch"
-			(at 25.4 36.1446 0)
+			(at 20.32 36.1446 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -43,7 +43,7 @@
 			)
 		)
 		(property "Title" "CPU, Reset, Clock & Buffers"
-			(at 25.146 37.338 0)
+			(at 20.066 37.338 0)
 			(do_not_autoplace yes)
 			(effects
 				(font
@@ -53,7 +53,7 @@
 			)
 		)
 		(property "More" "Includes PLD for added control signals and variable clock"
-			(at 25.146 39.624 0)
+			(at 20.066 39.624 0)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -66,45 +66,6 @@
 			(project "Episode 1 - The 6309 basics and more"
 				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580"
 					(page "2")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 25.4 52.07)
-		(size 38.1 12.7)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "34910a14-f854-477b-a224-1ce2708f8b5d")
-		(property "Sheetname" "Convert to PCB"
-			(at 25.4 51.3584 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "PCB.kicad_sch"
-			(at 25.4 65.3546 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-				(hide yes)
-			)
-		)
-		(instances
-			(project "Episode 1 - The 6309 basics and more"
-				(path "/5aeeb5e8-9d85-437a-bcb8-c2a3d321d580"
-					(page "3")
 				)
 			)
 		)

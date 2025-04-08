@@ -1,0 +1,36 @@
+# Berkeley PLA format generated using
+#
+# CUPL(WM)        5.0a Serial# 60008009
+# Device          g22v10  Library DLIB-h-40-1
+# Created         Mon Apr 07 19:36:26 2025
+# Name            HiDecode 
+# Partno          ATF22V10C 
+# Revision        1 
+# Date            2025-04-02 
+# Designer        Frederic Segard 
+# Company         MicroHobbyist 
+# Assembly        None 
+# Location        None 
+#
+# Inputs  0 1 A4 A5 
+#         A6 A7 A8 A9 
+#         A10 A11 A12 A13 
+#         A14 A15 !CONST E 
+#         !IORQ !MREQ Q 
+# Outputs !CONST !IORQ !MREQ A4.oe 
+#         A5.oe CONST.oe IORQ.oe MREQ.oe 
+.i 19
+.o 8
+.p 11
+---11111110000----1 1~~~~~~~
+---11111110000-1--- 1~~~~~~~
+--111111110000----1 ~1~~~~~~
+--111111110000-1--- ~1~~~~~~
+----------0000----1 ~~1~~~~~
+----------0000-1--- ~~1~~~~~
+1------------------ ~~~1~~~~
+1------------------ ~~~~1~~~
+-1----------------- ~~~~~1~~
+-1----------------- ~~~~~~1~
+-1----------------- ~~~~~~~1
+.end

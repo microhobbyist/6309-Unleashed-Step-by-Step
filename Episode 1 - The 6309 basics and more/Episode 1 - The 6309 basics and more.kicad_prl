@@ -80,25 +80,13 @@
   "project": {
     "files": [
       {
-        "name": "Episode 1 - The 6309 basics and more.kicad_pcb",
-        "open": false,
-        "window": {
-          "display": 0,
-          "maximized": false,
-          "pos_x": 779,
-          "pos_y": 62,
-          "size_x": 1782,
-          "size_y": 1218
-        }
-      },
-      {
         "name": "Episode 1 - The 6309 basics and more.kicad_sch",
         "open": false,
         "window": {
           "display": 0,
           "maximized": false,
-          "pos_x": 1539,
-          "pos_y": 89,
+          "pos_x": 1575,
+          "pos_y": 98,
           "size_x": 1775,
           "size_y": 1225
         }

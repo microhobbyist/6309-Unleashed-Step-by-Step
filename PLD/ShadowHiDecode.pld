@@ -1,0 +1,56 @@
+Name     ShadowHiDecode ;
+PartNo   ATF750C ;
+Date     2025-04-02 ;
+Revision 1 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   v750c ;
+
+/*
+          ________
+         |        |
+   E x---|1     24|---x Vcc                      
+   Q x---|2     23|---x !CONST                   
+ A15 x---|3     22|---x !MREQ                    
+ A14 x---|4     21|---x !IORQ                    
+ A13 x---|5     20|---x !ROMCS                   
+ A12 x---|6     19|---x !RAMOE                   
+ A11 x---|7     18|---x !RD                      
+ A10 x---|8     17|---x !ROMDIS                  
+  A9 x---|9     16|---x !RESET                   
+  A8 x---|10    15|---x A4                       
+  A7 x---|11    14|---x A5                       
+ GND x---|12    13|---x A6                       
+         |________|
+*/
+
+/* INPUTS */
+PIN 1  = E ;       /* CPU E clock */
+PIN 2  = Q ;       /* CPU Q clock */
+PIN 3  = A15 ;     /* ADDRESS bus */
+PIN 4  = A14 ;     /* ADDRESS bus */
+PIN 5  = A13 ;     /* ADDRESS bus */
+PIN 6  = A12 ;     /* ADDRESS bus */
+PIN 7  = A11 ;     /* ADDRESS bus */
+PIN 8  = A10 ;     /* ADDRESS bus */
+PIN 9  = A9 ;      /* ADDRESS bus */
+PIN 10 = A8 ;      /* ADDRESS bus */
+PIN 11 = A7 ;      /* ADDRESS bus */
+PIN 13 = A6 ;      /* ADDRESS bus */
+PIN 14 = A5 ;      /* ADDRESS bus */
+PIN 15 = A4 ;      /* ADDRESS bus */
+PIN 16 = !RESET ;  /* Reset line (active-low) */
+PIN 17 = !ROMDIS ; /* Rom/FLASH disable (active-low) */
+PIN 18 = !RD ;     /* Read line (active-low) */
+
+/* OUTPUTS */
+PIN 23 = !CONST ;  /* Constant memory region (for MMU use) */
+PIN 22 = !MREQ ;   /* Memory Request (active-low) */
+PIN 21 = !IORQ ;   /* Input/Output Request (active-low) */
+
+/* EQUATIONS */
+FIELD ADDR = [A15..A4] ;                          /* Address space */
+IORQ = ADDR:[FF0..FFE] & (Q # E) ;                /* 256-byte I/O range, excluding the 16-byte vector range */
+MREQ = (ADDR:[000..FEF] # ADDR:[FFF]) & (Q # E) ; /* Memory range, including the 16-byte vector range */

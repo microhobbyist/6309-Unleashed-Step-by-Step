@@ -1,0 +1,227 @@
+{COMPONENT S:\GITHUB\6309 UNLEASHED STEP-BY-STEP\PLD\SHADOWHIDECODE.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Thu Apr 03 06:37:47 2025 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P E {Pt "INPUT"}{Lq 0}{Ploc 100 380}}
+   {P Q {Pt "INPUT"}{Lq 0}{Ploc 100 340}}
+   {P A15 {Pt "INPUT"}{Lq 0}{Ploc 100 320}}
+   {P A14 {Pt "INPUT"}{Lq 0}{Ploc 100 300}}
+   {P A13 {Pt "INPUT"}{Lq 0}{Ploc 100 280}}
+   {P A12 {Pt "INPUT"}{Lq 0}{Ploc 100 260}}
+   {P A11 {Pt "INPUT"}{Lq 0}{Ploc 100 240}}
+   {P A10 {Pt "INPUT"}{Lq 0}{Ploc 100 220}}
+   {P A9 {Pt "INPUT"}{Lq 0}{Ploc 100 200}}
+   {P A8 {Pt "INPUT"}{Lq 0}{Ploc 100 180}}
+   {P A7 {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P A6 {Pt "INPUT"}{Lq 0}{Ploc 100 140}}
+   {P A5 {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P A4 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P RESET' {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P ROMDIS' {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P RD' {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P CONST' {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P RAMOE' {Pt "I/O"}{Lq 0}{Ploc 310 20}}
+   {P ROMCS' {Pt "I/O"}{Lq 0}{Ploc 310 40}}
+   {P IORQ' {Pt "I/O"}{Lq 0}{Ploc 310 60}}
+   {P MREQ' {Pt "I/O"}{Lq 0}{Ploc 310 80}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 205 410}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 390}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 350}
+   {Pnl 120 330}
+   {Pnl 120 310}
+   {Pnl 120 290}
+   {Pnl 120 270}
+   {Pnl 120 250}
+   {Pnl 120 230}
+   {Pnl 120 210}
+   {Pnl 120 190}
+   {Pnl 120 170}
+   {Pnl 120 150}
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 290 30}
+   {Pnl 290 50}
+   {Pnl 290 70}
+   {Pnl 290 90}
+
+   {Sd A 1 2 3 4 5 6 7 8 9 10 11 13 14 15 16 17 18 23 19 20 21 22}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 400 280 0}
+   {L 130 380 100 380}
+   {L 130 390 140 380 130 370}
+   {L 130 340 100 340}
+   {L 130 320 100 320}
+   {L 130 300 100 300}
+   {L 130 280 100 280}
+   {L 130 260 100 260}
+   {L 130 240 100 240}
+   {L 130 220 100 220}
+   {L 130 200 100 200}
+   {L 130 180 100 180}
+   {L 130 160 100 160}
+   {L 130 140 100 140}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 120 80 100 80}
+   {C 125 80 5}
+   {L 120 60 100 60}
+   {C 125 60 5}
+   {L 120 40 100 40}
+   {C 125 40 5}
+   {L 120 20 100 20}
+   {C 125 20 5}
+   {C 285 20 5}
+   {L 290 20 310 20}
+   {C 285 40 5}
+   {L 290 40 310 40}
+   {C 285 60 5}
+   {L 290 60 310 60}
+   {C 285 80 5}
+   {L 290 80 310 80}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "E" 140 380}
+   {T "Q" 140 340}
+   {T "A15" 140 320}
+   {T "A14" 140 300}
+   {T "A13" 140 280}
+   {T "A12" 140 260}
+   {T "A11" 140 240}
+   {T "A10" 140 220}
+   {T "A9" 140 200}
+   {T "A8" 140 180}
+   {T "A7" 140 160}
+   {T "A6" 140 140}
+   {T "A5" 140 120}
+   {T "A4" 140 100}
+   {T "RESET'" 140 80}
+   {T "ROMDIS'" 140 60}
+   {T "RD'" 140 40}
+   {T "CONST'" 140 20}
+   [Tj "RC"]
+   {T "RAMOE'" 270 20}
+   {T "ROMCS'" 270 40}
+   {T "IORQ'" 270 60}
+   {T "MREQ'" 270 80}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "V750C" 205 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD S:\GITHUB\6309 UNLEASHED STEP-BY-STEP\PLD\SHADOWHIDECODE 205 400}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N E
+   }
+   {N Q
+   }
+   {N A15
+   }
+   {N A14
+   }
+   {N A13
+   }
+   {N A12
+   }
+   {N A11
+   }
+   {N A10
+   }
+   {N A9
+   }
+   {N A8
+   }
+   {N A7
+   }
+   {N A6
+   }
+   {N A5
+   }
+   {N A4
+   }
+   {N RESET'
+   }
+   {N ROMDIS'
+   }
+   {N RD'
+   }
+   {N CONST'
+   }
+   {N RAMOE'
+   }
+   {N ROMCS'
+   }
+   {N IORQ'
+   }
+   {N MREQ'
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

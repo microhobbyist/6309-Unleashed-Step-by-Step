@@ -1,0 +1,51 @@
+LISTING FOR LOGIC DESCRIPTION FILE: HIDECODE.pld                     Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Apr 07 19:36:26 2025
+
+  1:Name     HiDecode ;
+  2:PartNo   ATF22V10C ;
+  3:Date     2025-04-02 ;
+  4:Revision 1 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   g22v10 ;
+ 10:
+ 11:
+ 12:/* INPUTS */
+ 13:PIN 1  = E ;       /* CPU E clock */
+ 14:PIN 2  = Q ;       /* CPU Q clock */
+ 15:PIN 3  = A15 ;     /* ADDRESS bus */
+ 16:PIN 4  = A14 ;     /* ADDRESS bus */
+ 17:PIN 5  = A13 ;     /* ADDRESS bus */
+ 18:PIN 6  = A12 ;     /* ADDRESS bus */
+ 19:PIN 7  = A11 ;     /* ADDRESS bus */
+ 20:PIN 8  = A10 ;     /* ADDRESS bus */
+ 21:PIN 9  = A9 ;      /* ADDRESS bus */
+ 22:PIN 10 = A8 ;      /* ADDRESS bus */
+ 23:PIN 11 = A7 ;      /* ADDRESS bus */
+ 24:PIN 13 = A6 ;      /* ADDRESS bus */
+ 25:PIN 14 = A5 ;      /* ADDRESS bus */
+ 26:PIN 15 = A4 ;      /* ADDRESS bus */
+ 27:
+ 28:/* OUTPUTS */
+ 29:PIN 23 = !CONST ;  /* Constant memory region (for MMU use) */
+ 30:PIN 22 = !MREQ ;   /* Memory Request (active-low) */
+ 31:PIN 21 = !IORQ ;   /* Input/Output Request (active-low) */
+ 32:
+ 33:/* EQUATIONS */
+ 34:FIELD ADDR = [A15..A4] ;                          /* Address space */
+ 35:IORQ = ADDR:[FF0..FFE] & (Q # E) ;                /* 256-byte I/O range, excluding the 16-byte vector range */
+ 36:MREQ = (ADDR:[000..FEF] # ADDR:[FFF]) & (Q # E) ; /* Memory range, including the 16-byte vector range */
+ 37:CONST = ADDR:[FE0..FFF] & (Q # E) ;               /* Constant RAM region with IO and vector */
+ 38:
+ 39:
+
+
+
+Jedec Fuse Checksum       (32c1)
+Jedec Transmit Checksum   (e503)

@@ -1,0 +1,53 @@
+%SIGNAL
+PIN  15 =  A4 
+PIN  14 =  A5 
+PIN  13 =  A6 
+PIN  11 =  A7 
+PIN  10 =  A8 
+PIN   9 =  A9 
+PIN   8 =  A10 
+PIN   7 =  A11 
+PIN   6 =  A12 
+PIN   5 =  A13 
+PIN   4 =  A14 
+PIN   3 =  A15 
+PIN  23 = !CONST 
+PIN   1 =  E 
+PIN  21 = !IORQ 
+PIN  22 = !MREQ 
+PIN   2 =  Q 
+%END
+
+%FIELD
+FIELD ADDR = A15,A14,A13,A12,A11,A10,A9,A8,A7,A6,A5,A4
+%END
+
+%EQUATION
+CONST =>
+    A5 & A6 & A7 & A8 & A9 & A10 & A11 & !A12 & !A13 & !A14 & !A15 & Q
+  # A5 & A6 & A7 & A8 & A9 & A10 & A11 & !A12 & !A13 & !A14 & !A15 & E
+
+IORQ =>
+    A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & !A12 & !A13 & !A14 & !A15 & Q
+  # A4 & A5 & A6 & A7 & A8 & A9 & A10 & A11 & !A12 & !A13 & !A14 & !A15 & E
+
+MREQ =>
+    !A12 & !A13 & !A14 & !A15 & Q
+  # !A12 & !A13 & !A14 & !A15 & E
+
+A4.oe  =>
+    0 
+
+A5.oe  =>
+    0 
+
+CONST.oe  =>
+    1 
+
+IORQ.oe  =>
+    1 
+
+MREQ.oe  =>
+    1 
+
+%END

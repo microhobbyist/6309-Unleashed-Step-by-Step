@@ -1,0 +1,61 @@
+%SIGNAL
+PIN  11 =  A0 
+PIN  10 =  A1 
+PIN   9 =  A2 
+PIN   8 =  A3 
+PIN   7 =  A4 
+PIN   6 =  A5 
+PIN   5 =  A6 
+PIN   4 =  A7 
+PIN   1 =  E 
+PIN  20 = !INIT0 
+PIN  19 = !INIT1 
+PIN   2 = !IOREQ 
+PIN  23 = !ROMDIS 
+PIN   3 =  R_W 
+PIN  22 = !SPEED 
+PIN  21 = !TASK 
+%END
+
+%FIELD
+FIELD ADDR = A7,A6,A5,A4,A3,A2,A1,A0
+%END
+
+%EQUATION
+INIT0 =>
+    !A0 & !A1 & !A2 & !A3 & A4 & !A5 & !A6 & A7
+  # E
+
+INIT1 =>
+    A0 & !A1 & !A2 & !A3 & A4 & !A5 & !A6 & A7
+  # E
+
+ROMDIS =>
+    A0 & A1 & A2 & A3 & A4 & !A5 & A6 & A7
+  # !R_W
+  # E
+
+SPEED =>
+    !A0 & !A1 & !A2 & A3 & A4 & !A5 & A6 & A7
+  # E
+
+TASK =>
+    !A4 & A5 & !A6 & A7
+  # E
+
+INIT0.oe  =>
+    1 
+
+INIT1.oe  =>
+    1 
+
+ROMDIS.oe  =>
+    1 
+
+SPEED.oe  =>
+    1 
+
+TASK.oe  =>
+    1 
+
+%END

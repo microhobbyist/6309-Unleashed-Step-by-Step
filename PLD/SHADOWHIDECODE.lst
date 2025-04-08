@@ -1,0 +1,74 @@
+LISTING FOR LOGIC DESCRIPTION FILE: SHADOWHIDECODE.pld               Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Apr 03 06:37:47 2025
+
+  1:Name     ShadowHiDecode ;
+  2:PartNo   ATF750C ;
+  3:Date     2025-04-02 ;
+  4:Revision 1 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   v750c ;
+ 10:
+ 11:
+ 12:/* INPUTS */
+ 13:PIN 1  = E ;       /* CPU E clock */
+ 14:PIN 2  = Q ;       /* CPU Q clock */
+ 15:PIN 3  = A15 ;     /* ADDRESS bus */
+ 16:PIN 4  = A14 ;     /* ADDRESS bus */
+ 17:PIN 5  = A13 ;     /* ADDRESS bus */
+ 18:PIN 6  = A12 ;     /* ADDRESS bus */
+ 19:PIN 7  = A11 ;     /* ADDRESS bus */
+ 20:PIN 8  = A10 ;     /* ADDRESS bus */
+ 21:PIN 9  = A9 ;      /* ADDRESS bus */
+ 22:PIN 10 = A8 ;      /* ADDRESS bus */
+ 23:PIN 11 = A7 ;      /* ADDRESS bus */
+ 24:PIN 13 = A6 ;      /* ADDRESS bus */
+ 25:PIN 14 = A5 ;      /* ADDRESS bus */
+ 26:PIN 15 = A4 ;      /* ADDRESS bus */
+ 27:PIN 16 = !RESET ;  /* Reset line (active-low) */
+ 28:PIN 17 = !ROMDIS ; /* Rom/FLASH disable (active-low) */
+ 29:PIN 18 = !RD ;     /* Read line (active-low) */
+ 30:
+ 31:/* OUTPUTS */
+ 32:PIN 23 = !CONST ;  /* Constant memory region (for MMU use) */
+ 33:PIN 22 = !MREQ ;   /* Memory Request (active-low) */
+ 34:PIN 21 = !IORQ ;   /* Input/Output Request (active-low) */
+ 35:PIN 20 = !ROMCS ;  /* Active-low ROM Chip Select */
+ 36:PIN 19 = !RAMOE ;  /* Active-low RAM Output Enable */
+ 37:
+ 38:/* NODES */
+ 39:NODE  SHADOW ;    /* Internal use: D-Flip-Flop (for Shadow Copy) */
+ 40:
+ 41:/* EQUATIONS */
+ 42:FIELD ADDR = [A15..A4] ;                          /* Address space */
+ 43:IORQ = ADDR:[FF0..FFE] & (Q # E) ;                /* 256-byte I/O range, excluding the 16-byte vector range */
+ 44:MREQ = (ADDR:[000..FEF] # ADDR:[FFF]) & (Q # E) ; /* Memory range, including the 16-byte vector range */
+ 45:
+ 46:/* SHADOW COPY LOGIC */
+ 47:SHADOW.D   = ROMDIS # (!RESET & SHADOW) ; /* The current state of Q, fed back to the logic for D */
+ 48:SHADOW.AR  = RESET ;                      /* Resets the SR latch (SHADOW_Q = ROMSEL active low) */
+ 49:SHADOW.SP  = ROMDIS ;                     /* Disable de ROM by Setting the SR latch (SHADOW_NQ = RAMSEL active low) */
+ 50:
+ 51:/* Conditional Logic for ROMCS and RAMOE */
+ 52:ROMCS      = SHADOW # MREQ ;              /* ROM Select */
+ 53:RAMOE      = !SHADOW # RD  ;              /* RAM Select */
+
+LISTING FOR LOGIC DESCRIPTION FILE: SHADOWHIDECODE.pld               Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Thu Apr 03 06:37:47 2025
+
+ 54:
+
+
+
+Jedec Fuse Checksum       (a33d)
+Jedec Transmit Checksum   (efae)

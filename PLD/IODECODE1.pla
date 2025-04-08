@@ -1,0 +1,42 @@
+# Berkeley PLA format generated using
+#
+# CUPL(WM)        5.0a Serial# 60008009
+# Device          g22v10  Library DLIB-h-40-1
+# Created         Mon Apr 07 19:38:30 2025
+# Name            IODecode1 
+# Partno          ATF22V10C 
+# Revision        1 
+# Date            2025-04-07 
+# Designer        Frederic Segard 
+# Company         MicroHobbyist 
+# Assembly        None 
+# Location        None 
+#
+# Inputs  1 A0 A1 A2 
+#         A3 A4 A5 A6 
+#         A7 E !INIT0 !INIT1 
+#         !IOREQ !ROMDIS R_W !SPEED 
+#         !TASK 
+# Outputs !INIT0 !INIT1 !ROMDIS !SPEED 
+#         !TASK INIT0.oe INIT1.oe ROMDIS.oe 
+#         SPEED.oe TASK.oe 
+.i 17
+.o 10
+.p 16
+-00001001-------- 1~~~~~~~~~
+---------1------- 1~~~~~~~~~
+-10001001-------- ~1~~~~~~~~
+---------1------- ~1~~~~~~~~
+-11111011-------- ~~1~~~~~~~
+--------------0-- ~~1~~~~~~~
+---------1------- ~~1~~~~~~~
+-00011011-------- ~~~1~~~~~~
+---------1------- ~~~1~~~~~~
+-----0101-------- ~~~~1~~~~~
+---------1------- ~~~~1~~~~~
+1---------------- ~~~~~1~~~~
+1---------------- ~~~~~~1~~~
+1---------------- ~~~~~~~1~~
+1---------------- ~~~~~~~~1~
+1---------------- ~~~~~~~~~1
+.end

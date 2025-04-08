@@ -1,0 +1,56 @@
+LISTING FOR LOGIC DESCRIPTION FILE: IODECODE1.pld                    Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Mon Apr 07 19:38:30 2025
+
+  1:Name     IODecode1 ;
+  2:PartNo   ATF22V10C ;
+  3:Date     2025-04-07 ;
+  4:Revision 1 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   g22v10 ;
+ 10:
+ 11:/*
+ 12:
+ 13:*/
+ 14:
+ 15:/* INPUTS */
+ 16:PIN 1  = E ;       /* E Clock */
+ 17:PIN 2  = !IOREQ ;  /* Input/Output Request (active-low) */
+ 18:PIN 3  = R_W ;     /* Read & Write line */
+ 19:PIN 4  = A7 ;      /* ADDRESS bus */
+ 20:PIN 5  = A6 ;      /* ADDRESS bus */
+ 21:PIN 6  = A5 ;      /* ADDRESS bus */
+ 22:PIN 7  = A4 ;      /* ADDRESS bus */
+ 23:PIN 8  = A3 ;      /* ADDRESS bus */
+ 24:PIN 9  = A2 ;      /* ADDRESS bus */
+ 25:PIN 10 = A1 ;      /* ADDRESS bus */
+ 26:PIN 11 = A0 ;      /* ADDRESS bus */
+ 27:
+ 28:/* OUTPUTS */
+ 29:PIN 23 = !ROMDIS ;  /* ROM/FLASH disable write signal (active-low) */
+ 30:PIN 22 = !SPEED ;   /* Speed register to change clock speed of CPU (active-low)*/
+ 31:PIN 21 = !TASK ;    /* Task registers (active-low) */
+ 32:PIN 20 = !INIT0 ;   /* Init0 @ $FF90 bit-6 for MMU enable (active-low) */
+ 33:PIN 19 = !INIT1 ;   /* Init1 @ $FF91 bit-0 for MMU task switching (active-low) */
+ 34:
+ 35:/* EQUATIONS */
+ 36:FIELD ADDR = [A7..A0] ;          /* Address space */
+ 37:
+ 38:INIT0  = ADDR:[90] # E ;         /* INIT0 register bit-6 = MMU enable */
+ 39:INIT1  = ADDR:[91] # E ;         /* INIT1 register bit-0 = Task 0 or 1 */
+ 40:TASK   = ADDR:[A0..AF] # E ;     /* 16-byte task registers */
+ 41:SPEED  = ADDR:[D8] # E ;         /* Speed register 00=0.89MHz, 01=1.79MHz, 10=3.58MHz 11-5MHz */
+ 42:ROMDIS = ADDR:[DF] # E # !R_W ;  /* Write to $FFDF to disable ROM for all RAM */
+ 43:
+ 44:
+
+
+
+Jedec Fuse Checksum       (5aec)
+Jedec Transmit Checksum   (3ad1)

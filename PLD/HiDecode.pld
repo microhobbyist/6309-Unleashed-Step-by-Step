@@ -1,0 +1,53 @@
+Name     HiDecode ;
+PartNo   ATF22V10C ;
+Date     2025-04-07 ;
+Revision 2 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   g22v10 ;
+
+/*         ________
+          |        |
+    E i---|1     24|---p Vcc                      
+    Q i---|2     23|---o !CONST                   
+  A15 i---|3     22|---o !MREQ                    
+  A14 i---|4     21|---o !IORQ                    
+  A13 i---|5     20|---x                          
+  A12 i---|6     19|---x                          
+  A11 i---|7     18|---x                          
+  A10 i---|8     17|---x                          
+   A9 i---|9     16|---x                          
+   A8 i---|10    15|---i A4                       
+   A7 i---|11    14|---i A5                       
+  GND p---|12    13|---i A6                       
+          |________|
+*/
+
+/* INPUTS */
+PIN 1  = E ;       /* CPU E clock */
+PIN 2  = Q ;       /* CPU Q clock */
+PIN 3  = A15 ;     /* ADDRESS bus */
+PIN 4  = A14 ;     /* ADDRESS bus */
+PIN 5  = A13 ;     /* ADDRESS bus */
+PIN 6  = A12 ;     /* ADDRESS bus */
+PIN 7  = A11 ;     /* ADDRESS bus */
+PIN 8  = A10 ;     /* ADDRESS bus */
+PIN 9  = A9 ;      /* ADDRESS bus */
+PIN 10 = A8 ;      /* ADDRESS bus */
+PIN 11 = A7 ;      /* ADDRESS bus */
+PIN 13 = A6 ;      /* ADDRESS bus */
+PIN 14 = A5 ;      /* ADDRESS bus */
+PIN 15 = A4 ;      /* ADDRESS bus */
+
+/* OUTPUTS */
+PIN 23 = !CONST ;  /* Constant memory region (for MMU use) */
+PIN 22 = !MREQ ;   /* Memory Request (active-low) */
+PIN 21 = !IORQ ;   /* Input/Output Request (active-low) */
+
+/* EQUATIONS */
+FIELD ADDR = [A15..A4] ;                          /* Address space */
+IORQ = ADDR:[FF0..FFE] & (Q # E) ;                /* 256-byte I/O range, excluding the 16-byte vector range */
+MREQ = (ADDR:[000..FEF] # ADDR:[FFF]) & (Q # E) ; /* Memory range, including the 16-byte vector range */
+CONST = ADDR:[FE0..FFF] & (Q # E) ;               /* Constant RAM region with IO and vector */

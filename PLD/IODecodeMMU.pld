@@ -1,0 +1,55 @@
+Name     IODecode1 ;
+PartNo   ATF22V10C ;
+Date     2025-04-07 ;
+Revision 2 ;
+Designer Frederic Segard ;
+Company  MicroHobbyist ;
+Assembly None ;
+Location None ;
+Device   g22v10 ;
+
+/*            ________
+             |        |
+       E i---|1     24|---p Vcc                      
+  !IOREQ i---|2     23|---o !ROMDIS                  
+     R_W i---|3     22|---o !SPEED                   
+      A7 i---|4     21|---o !TASK                    
+      A6 i---|5     20|---o !INIT0                   
+      A5 i---|6     19|---o !INIT1                   
+      A4 i---|7     18|---x                          
+      A3 i---|8     17|---x                          
+      A2 i---|9     16|---x                          
+      A1 i---|10    15|---x                          
+      A0 i---|11    14|---x                          
+     GND p---|12    13|---x                          
+             |________|
+*/
+
+/* INPUTS */
+PIN 1  = E ;       /* E Clock */
+PIN 2  = !IOREQ ;  /* Input/Output Request (active-low) */
+PIN 3  = R_W ;     /* Read & Write line */
+PIN 4  = A7 ;      /* ADDRESS bus */
+PIN 5  = A6 ;      /* ADDRESS bus */
+PIN 6  = A5 ;      /* ADDRESS bus */
+PIN 7  = A4 ;      /* ADDRESS bus */
+PIN 8  = A3 ;      /* ADDRESS bus */
+PIN 9  = A2 ;      /* ADDRESS bus */
+PIN 10 = A1 ;      /* ADDRESS bus */
+PIN 11 = A0 ;      /* ADDRESS bus */
+
+/* OUTPUTS */
+PIN 23 = !ROMDIS ;  /* ROM/FLASH disable write signal (active-low) */
+PIN 22 = !SPEED ;   /* Speed register to change clock speed of CPU (active-low)*/
+PIN 21 = !TASK ;    /* Task registers (active-low) */
+PIN 20 = !INIT0 ;   /* Init0 @ $FF90 bit-6 for MMU enable (active-low) */
+PIN 19 = !INIT1 ;   /* Init1 @ $FF91 bit-0 for MMU task switching (active-low) */
+
+/* EQUATIONS */
+FIELD ADDR = [A7..A0] ;          /* Address space */
+
+INIT0  = ADDR:[90] # E ;         /* INIT0 register bit-6 = MMU enable */
+INIT1  = ADDR:[91] # E ;         /* INIT1 register bit-0 = Task 0 or 1 */
+TASK   = ADDR:[A0..AF] # E ;     /* 16-byte task registers */
+SPEED  = ADDR:[D8] # E ;         /* Speed register 00=0.89MHz, 01=1.79MHz, 10=3.58MHz 11-5MHz */
+ROMDIS = ADDR:[DF] # E # !R_W ;  /* Write to $FFDF to disable ROM for all RAM */
