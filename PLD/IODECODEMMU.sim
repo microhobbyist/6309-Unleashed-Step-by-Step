@@ -1,0 +1,84 @@
+%SIGNAL
+PIN  13 =  A0 
+PIN  11 =  A1 
+PIN  10 =  A2 
+PIN   9 =  A3 
+PIN   8 =  A4 
+PIN   7 =  A5 
+PIN   6 =  A6 
+PIN   5 =  A7 
+PIN  14 = !CONST 
+PIN  23 =  D0 
+PIN  22 =  D6 
+PIN   1 =  E 
+PIN   2 = !IOREQ 
+PIN  16 =  MMUEN 
+PIN  15 =  MMUTASK 
+PIN   4 = !RESET 
+PIN  21 = !ROMDIS 
+PIN   3 =  R_W 
+PIN  20 = !SPEED 
+PIN  19 = !TASK 
+%END
+
+%FIELD
+FIELD ADDR = A7,A6,A5,A4,A3,A2,A1,A0
+%END
+
+%EQUATION
+D0 =>
+    !MMUTASK
+
+D0.oe  =>
+    A0 & !A1 & !A2 & !A3 & A4 & !A5 & !A6 & A7 & E & !IOREQ & R_W
+
+D6 =>
+    !MMUEN
+
+D6.oe  =>
+    !A0 & !A1 & !A2 & !A3 & A4 & !A5 & !A6 & A7 & E & !IOREQ & R_W
+
+MMUEN.d  =>
+    !A0 & !A1 & !A2 & !A3 & A4 & !A5 & !A6 & A7 & CONST & D6 & E & !IOREQ & RESET & !R_W
+
+MMUEN.ar MMUTASK.ar  =>
+    RESET
+
+MMUEN.sp MMUTASK.sp  =>
+    0 
+
+MMUTASK.d  =>
+    A0 & !A1 & !A2 & !A3 & A4 & !A5 & !A6 & A7 & D0 & E & !IOREQ & RESET & !R_W
+
+MMUTASK.ar  =>
+    
+MMUTASK.sp  =>
+    
+ROMDIS =>
+    A0 & A1 & A2 & A3 & A4 & !A5 & A6 & A7 & E & !IOREQ & !R_W
+
+SPEED =>
+    !A0 & !A1 & !A2 & A3 & A4 & !A5 & A6 & A7 & E & !IOREQ
+
+TASK =>
+    !A4 & A5 & !A6 & A7 & E & !IOREQ
+
+CONST.oe  =>
+    0 
+
+MMUEN.oe  =>
+    1 
+
+MMUTASK.oe  =>
+    1 
+
+ROMDIS.oe  =>
+    1 
+
+SPEED.oe  =>
+    1 
+
+TASK.oe  =>
+    1 
+
+%END

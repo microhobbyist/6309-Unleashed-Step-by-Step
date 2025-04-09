@@ -1,0 +1,103 @@
+LISTING FOR LOGIC DESCRIPTION FILE: IODECODEMMU.pld                  Page 1
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Apr 08 07:19:06 2025
+
+  1:Name     IODecodeMMU ;
+  2:PartNo   ATF22V10C ;
+  3:Date     2025-04-07 ;
+  4:Revision 2 ;
+  5:Designer Frederic Segard ;
+  6:Company  MicroHobbyist ;
+  7:Assembly None ;
+  8:Location None ;
+  9:Device   g22v10 ;
+ 10:
+ 11:/*            ________
+ 12:             |        |
+ 13:       E i---|1     24|---p Vcc
+ 14:  !IOREQ i---|2     23|---o D0
+ 15:     R_W i---|3     22|---o D6
+ 16:  !RESET i---|4     21|---o !ROMDIS
+ 17:      A7 i---|5     20|---o !SPEED
+ 18:      A6 i---|6     19|---o !TASK
+ 19:      A5 i---|7     18|---x (future IO)                          
+ 20:      A4 i---|8     17|---x (future IO)                          
+ 21:      A3 i---|9     16|---o MMUEN                         
+ 22:      A2 i---|10    15|---o MMUTASK                         
+ 23:      A1 i---|11    14|---i !CONST                         
+ 24:     GND p---|12    13|---i A0                          
+ 25:             |________|
+ 26:*/
+ 27:
+ 28:/* INPUTS */
+ 29:PIN 1  = E ;       /* E Clock */
+ 30:PIN 2  = !IOREQ ;  /* Input/Output Request (active-low) */
+ 31:PIN 3  = R_W ;     /* Read & Write line */
+ 32:PIN 4  = !RESET ;  /* Reset line */
+ 33:PIN 5  = A7 ;      /* ADDRESS bus */
+ 34:PIN 6  = A6 ;      /* ADDRESS bus */
+ 35:PIN 7  = A5 ;      /* ADDRESS bus */
+ 36:PIN 8  = A4 ;      /* ADDRESS bus */
+ 37:PIN 9  = A3 ;      /* ADDRESS bus */
+ 38:PIN 10 = A2 ;      /* ADDRESS bus */
+ 39:PIN 11 = A1 ;      /* ADDRESS bus */
+ 40:PIN 13 = A0 ;      /* ADDRESS bus */
+ 41:PIN 14 = !CONST ;  /* MMU: Constant RAM and IO area */
+ 42:
+ 43:/* BIDIRECTIONAL */
+ 44:PIN 23 = D0 ;
+ 45:PIN 22 = D6 ;
+ 46:
+ 47:/* OUTPUTS */
+ 48:PIN 21 = !ROMDIS ;  /* ROM/FLASH disable write signal at address $FFDF (active-low) */
+ 49:PIN 20 = !SPEED ;   /* Register to change clock speed of CPU at address $FFD8 (active-low)*/
+ 50:PIN 19 = !TASK ;    /* MMU task registers at addresses $FFA0-$FFAF(active-low) */
+ 51:
+ 52:
+ 53:PIN 16 = MMUEN ;    /* MMU enable, at address $FF90, bit-6 */
+
+LISTING FOR LOGIC DESCRIPTION FILE: IODECODEMMU.pld                  Page 2
+
+CUPL(WM): Universal Compiler for Programmable Logic
+Version 5.0a Serial# 60008009
+Copyright (c) 1983, 1998 Logical Devices, Inc.
+Created Tue Apr 08 07:19:06 2025
+
+ 54:PIN 15 = MMUTASK ;  /* MMU task 0 or 1, at address $FF91, bit-0 */
+ 55:
+ 56:/* EQUATIONS */
+ 57:FIELD ADDR = [A7..A0] ;          /* Address space */
+ 58:
+ 59:/* I/O addresses */
+ 60:TASK   = ADDR:[A0..AF] & E & IOREQ ;     /* 16-byte task registers */
+ 61:SPEED  = ADDR:[D8] & E & IOREQ ;         /* Speed register 00=0.89MHz, 01=1.79MHz, 10=3.58MHz 11-5MHz */
+ 62:ROMDIS = ADDR:[DF] & E & IOREQ & !R_W ;  /* Write to $FFDF to disable ROM for all RAM */
+ 63:
+ 64:/* Internal register for MMUEN (bit 6 (of D6) at address $FF90) */
+ 65:MMUEN.d  = ADDR:['h'90] & E & IOREQ & !R_W & !RESET & D6 & !CONST ;
+ 66:MMUEN.ar = !RESET ;
+ 67:MMUEN.sp = 'b'0 ;
+ 68:
+ 69:/* Internal register for MMUTASK (bit 0 (of) D0 at address $FF91) */
+ 70:MMUTASK.d  = ADDR:['h'91] & E & IOREQ & !R_W & !RESET & D0 ;
+ 71:MMUTASK.ar = !RESET ;
+ 72:MMUTASK.sp = 'b'0 ;
+ 73:
+ 74:/* Bidirectional readback from internal registers */
+ 75:/* D6 shows MMUEN when reading $FF90 */
+ 76:D6     = MMUEN ;
+ 77:D6.oe  = ADDR:['h'90] & E & IOREQ & R_W ;
+ 78:
+ 79:/* D0 shows MMUTASK when reading $FF91 */
+ 80:D0     = MMUTASK ;
+ 81:D0.oe  = ADDR:['h'91] & E & IOREQ & R_W ;
+ 82:
+ 83:
+
+
+
+Jedec Fuse Checksum       (526e)
+Jedec Transmit Checksum   (5263)
